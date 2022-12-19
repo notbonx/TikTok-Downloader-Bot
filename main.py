@@ -1,20 +1,10 @@
-# Copyright 2021 TerminalWarlord under the terms of the MIT
-# license found at https://github.com/TerminalWarlord/TikTok-Downloader-Bot/blob/master/LICENSE
-# Encoding = 'utf-8'
-# Fork and Deploy, do not modify this repo and claim it yours
-# For collaboration mail me at dev.jaybee@gmail.com
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, InlineQueryResultArticle, InputTextMessageContent
 import shutil
 import requests
-import json
 import os
 import re
-from bs4 import BeautifulSoup as bs
 import time
-from datetime import timedelta
-import math
-import base64
 from progress_bar import progress, TimeFormatter, humanbytes
 from dotenv import load_dotenv
 
@@ -25,32 +15,21 @@ api = int(os.environ.get('API_KEY'))
 hash = os.environ.get('API_HASH')
 chnnl = os.environ.get('CHANNEL_URL')
 BOT_URL = os.environ.get('BOT_URL')
-app = Client("JayBee", bot_token=bot_token, api_id=api, api_hash=hash, workers=workers)
+
+api = 9638611
+hash = "756fc92996367e701c5b6f0eacec00ae"
+app = Client("bonx", bot_token=bot_token, api_id=api, api_hash=hash, workers=workers)
 
 
 
 @app.on_message(filters.command('start'))
 def start(client, message):
-    kb = [[InlineKeyboardButton('Channel 🛡', url=chnnl),InlineKeyboardButton('Repo 🔰', url="https://github.com/TerminalWarlord/TikTok-Downloader-Bot/")]]
+    kb = [InlineKeyboardButton('Owner', url="pingerror.t.me")]
     reply_markup = InlineKeyboardMarkup(kb)
-    app.send_message(chat_id=message.from_user.id, text=f"Hello there, I am **TikTok Downloader Bot**.\nI can download TikTok video without Watermark.\n\n"
-                          "__**Developer :**__ __@JayBeeDev__\n"
-                          "__**Language :**__ __Python__\n"
-                          "__**Framework :**__ __🔥 Pyrogram__",
+    app.send_message(chat_id=message.from_user.id, text=f"I'm work",
                      parse_mode='md',
                      reply_markup=reply_markup)
 
-
-
-
-@app.on_message(filters.command('help'))
-def help(client, message):
-    kb = [[InlineKeyboardButton('Channel 🛡', url=chnnl),InlineKeyboardButton('Repo 🔰', url="https://github.com/TerminalWarlord/TikTok-Downloader-Bot/")]]
-    reply_markup = InlineKeyboardMarkup(kb)
-    app.send_message(chat_id=message.from_user.id, text=f"Hello there, I am **TikTok Downloader Bot**.\nI can download any TikTok video from a given link.\n\n"
-                                            "__Send me a TikTok video link__",
-                     parse_mode='md',
-                     reply_markup=reply_markup)
 
 
 @app.on_message((filters.regex("http://")|filters.regex("https://")) & (filters.regex('tiktok')|filters.regex('douyin')))
@@ -61,9 +40,6 @@ def tiktok_dl(client, message):
     link = re.findall(r'\bhttps?://.*[(tiktok|douyin)]\S+', message.text)[0]
     link = link.split("?")[0]
 
-
-
-    
     params = {
       "link": link
     }
