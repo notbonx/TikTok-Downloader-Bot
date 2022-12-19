@@ -15,9 +15,6 @@ api = int(os.environ.get('API_KEY'))
 hash = os.environ.get('API_HASH')
 chnnl = os.environ.get('CHANNEL_URL')
 BOT_URL = os.environ.get('BOT_URL')
-
-api = 9638611
-hash = "756fc92996367e701c5b6f0eacec00ae"
 app = Client("bonx", bot_token=bot_token, api_id=api, api_hash=hash, workers=workers)
 
 
